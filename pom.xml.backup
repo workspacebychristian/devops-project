@@ -21,6 +21,14 @@
     <module>webapp</module>
   </modules>
 
+  <distributionManagement>
+    <site>
+      <id>site-server</id>
+      <name>Test Project Site</name>
+      <url>file:///tmp/maven-project-site</url>
+    </site>
+  </distributionManagement>
+
   <build>
     <plugins>
       <plugin>
@@ -152,13 +160,5 @@
   <prerequisites>
     <maven>3.0.3</maven>
   </prerequisites>
-
-<distributionManagement>
-    <repository>
-        <id>central</id>
-        <name>ip-172-31-24-31.ec2.internal-releases</name>
-        <url>http://34.193.121.219:8082/artifactory/devops-project-libs-release-local</url>
-    </repository>
-</distributionManagement>
 
 </project>
