@@ -6,7 +6,7 @@
     become: true
     get_url: 
       url: http://34.193.121.219:8082/artifactory/devops-project-libs-release-local/com/theITern/theITern/1.0-RELEASE/theITern-1.0-RELEASE.war
-      dest: /home/ubuntu
+      dest: /home/ec2-user
       url_username: admin
       url_password: Iamchasingdream$1
 
@@ -32,10 +32,10 @@
 
   - name: Build image and with build args
     docker_image:
-      name: workspacebychuka
+      name: workspacebychuka/devops
       repository: workspacebychuka/devops:{{build_number}}
       build:
-        path: /home/ubuntu
+        path: /home/ec2-user
         args:
           listen_port: 8080
       source: build
@@ -50,7 +50,7 @@
 
   - name: Push to docker hub
     docker_image:
-        name: workspacebychuka
+        name: workspacebychuka/devops
         repository: workspacebychuka/devops:{{build_number}}
         force_tag: yes
         push: yes
