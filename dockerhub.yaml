@@ -32,8 +32,8 @@
 
   - name: Build image and with build args
     docker_image:
-      name: adegokeobafemi/july-devops
-      repository: adegokeobafemi/july-devops:{{build_number}}
+      name: workspacebychuka
+      repository: workspacebychuka/devops:{{build_number}}
       build:
         path: /home/ubuntu
         args:
@@ -44,14 +44,14 @@
   
   - name: Log into DockerHub
     docker_login:
-     username: adegokeobafemi
-     password: Wolebayo89
+     username: workspacebychuka@gmail.com
+     password: Iamzebra1
  
 
   - name: Push to docker hub
     docker_image:
-        name: adegokeobafemi/july-devops
-        repository: adegokeobafemi/july-devops:{{build_number}}
+        name: workspacebychuka
+        repository: workspacebychuka/devops:{{build_number}}
         force_tag: yes
         push: yes
         source: local
