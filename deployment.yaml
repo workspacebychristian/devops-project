@@ -1,0 +1,22 @@
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chuka-deploy
+  labels:
+    app: chuka
+spec:
+ replicas: 2
+ selector:
+   matchLabels:
+     app: chuka
+ template:
+   metadata:
+     labels:
+       app: chuka
+   spec:
+     containers:
+     - name: chuka-con
+       image: workspacebychuka/devops:23-08-2024
+       ports:
+       - containerPort: 8080

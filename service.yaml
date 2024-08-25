@@ -1,0 +1,15 @@
+#Service Type nodePort
+apiVersion: v1
+kind: Service
+metadata:
+  name: chuka-service
+  labels:
+    app: chuka
+spec:
+  selector:
+    app: chuka
+  type: NodePort
+  ports:
+  - nodePort: 30001 #pick within the 2767available to NodePort starting from 30,001
+    port: 8080
+    targetPort: 8080
