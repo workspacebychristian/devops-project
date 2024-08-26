@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chuka-deploy
+  name: chuka
   labels:
     app: chuka
 spec:
@@ -17,6 +17,6 @@ spec:
    spec:
      containers:
      - name: chuka-con
-       image: workspacebychuka/devops:23-08-2024
+       image: workspacebychuka/devops:latest #edit image but leave :latest as make variable remain interacting with jenkinsfile {BUILD_NUMBER}
        ports:
        - containerPort: 8080

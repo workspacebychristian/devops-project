@@ -97,7 +97,7 @@ pipeline {
             
             steps {
                   sshagent(['ssh_key']) {
-                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ec2-user@34.214.89.85 -C \"ansible-playbook  -vvv -e build_number=${BUILD_NUMBER} dockerhub.yaml\""       
+                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ec2-user@18.209.132.236 -C \"ansible-playbook  -vvv -e build_number=${BUILD_NUMBER} dockerhub.yaml\""       
                     }
                 }
         } 
@@ -106,8 +106,8 @@ pipeline {
             
             steps {
                   sshagent(['ssh_key']) {
-                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no deployment.yaml ubuntu@44.212.19.177:/home/ubuntu"
-                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no service.yaml ubuntu@44.212.19.177:/home/ubuntu"
+                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no deployment.yaml ubuntu@107.23.253.7:/home/ubuntu"
+                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no service.yaml ubuntu@107.23.253.7:/home/ubuntu"
                     }
                 }
         } 
@@ -123,10 +123,10 @@ pipeline {
             
             steps {
                   sshagent(['ssh_key']) {
-                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@44.212.19.177 -C \"kubectl set image deployment/chuka-deploy customcontainer=workspacebychuka/devops:${BUILD_NUMBER}\""
-                        //sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@44.233.10.40 -C \"kubectl delete pod class-deploy2\""
-                        //sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@44.233.10.40 -C \"kubectl apply -f deployment.yaml\""
-                        //sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@44.233.10.40 -C \"kubectl apply -f service.yaml\""
+                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl set image deployment/chuka customcontainer=workspacebychuka/devops:${BUILD_NUMBER}\""
+                        //sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl delete pod class-deploy2\""
+                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl apply -f deployment.yaml\""
+                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl apply -f service.yaml\""
 		    }
                 }  
         } 
