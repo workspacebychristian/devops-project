@@ -18,7 +18,7 @@ pipeline {
             dir('webapp'){
             sh "pwd"
             sh "ls -lah"
-            sh "mvn clean package"
+            sh "mvn package"
           }
         }
          
