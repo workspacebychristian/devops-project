@@ -40,7 +40,7 @@ pipeline {
             steps {
                 rtServer (
                     id: "jfrog",
-                    url: "http://34.193.121.219/:8082/artifactory",
+                    url: "http://54.166.108.10:8082/artifactory",
                     credentialsId: "jfrog"
                 )
 
@@ -86,9 +86,9 @@ pipeline {
                   sshagent(['ssh_agent']) {
                        sh "chmod 400  nv-kp.pem"
                        sh "ls -lah"
-                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerfile ec2-user@18.209.132.236:/home/ec2-user"
-                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerfile ec2-user@18.209.132.236:/home/ec2-user"
-                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerhub.yaml ec2-user@18.209.132.236:/home/ec2-user"
+                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerfile ec2-user@34.233.34.128:/home/ec2-user"
+                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerfile ec2-user@34.233.34.128:/home/ec2-user"
+                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerhub.yaml ec2-user@34.233.34.128:/home/ec2-user"
                     }
                 }
         } 
@@ -97,7 +97,7 @@ pipeline {
             
             steps {
                   sshagent(['ssh_key']) {
-                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ec2-user@18.209.132.236 -C \"ansible-playbook  -vvv -e build_number=${BUILD_NUMBER} dockerhub.yaml\""       
+                        sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ec2-user@34.233.34.128 -C \"ansible-playbook  -vvv -e build_number=${BUILD_NUMBER} dockerhub.yaml\""       
                     }
                 }
         } 

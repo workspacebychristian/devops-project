@@ -5,8 +5,8 @@
   - name: Pull .war artifact from Artifactory
     become: true
     get_url: 
-      url: http://34.193.121.219:8082/artifactory/devops-project-libs-release-local/com/theITern/theITern/1.0-RELEASE/theITern-1.0-RELEASE.war
-      dest: /home/ec2-user
+      url: http://54.166.108.10:8082/artifactory/devops-project-libs-release-local/com/theITern/theITern/1.0-RELEASE/theITern-1.0-RELEASE.war
+      dest: /home/ubuntu
       url_username: admin
       url_password: Iamchasingdream$1
 
@@ -35,7 +35,7 @@
       name: workspacebychuka/devops
       repository: workspacebychuka/devops:{{build_number}}
       build:
-        path: /home/ec2-user
+        path: /home/ubuntu
         args:
           listen_port: 8080
       source: build
