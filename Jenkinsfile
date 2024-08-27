@@ -18,7 +18,7 @@ pipeline {
             dir('webapp'){
             sh "pwd"
             sh "ls -lah"
-            sh "mvn package"
+          //sh "mvn package"
        // Integrate the specified web.xml path here
           sh "mvn clean package -DwebXml=/home/ubuntu/devops/devops-project/webapp/src/main/webapp/WEB-INF\web.xml"
           }
