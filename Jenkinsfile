@@ -2,7 +2,7 @@ pipeline {
   agent any
   tools {
   
-  maven 'Maven'
+  maven 'Maven' // Ensure this matches the Maven tool name configured in Jenkins
    
   }
     stages {
@@ -19,6 +19,8 @@ pipeline {
             sh "pwd"
             sh "ls -lah"
             sh "mvn package"
+       // Integrate the specified web.xml path here
+          sh "mvn clean package -DwebXml=/var/lib/jenkins/workspace/xxproject/webapp/src/main/webapp/WEB-INF/web.xml"
           }
         }
          
