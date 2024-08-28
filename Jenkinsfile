@@ -87,7 +87,6 @@ pipeline {
                        sh "chmod 400  nv-kp.pem"
                        sh "ls -lah"
                         sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerfile ec2-user@34.233.34.128:/home/ec2-user"
-                        sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerfile ec2-user@34.233.34.128:/home/ec2-user"
                         sh "scp -i nv-kp.pem -o StrictHostKeyChecking=no dockerhub.yaml ec2-user@34.233.34.128:/home/ec2-user"
                     }
                 }
