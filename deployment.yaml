@@ -6,7 +6,7 @@ metadata:
   labels:
     app: chuka
 spec:
- replicas: 2
+ replicas: 3
  selector:
    matchLabels:
      app: chuka
@@ -17,6 +17,7 @@ spec:
    spec:
      containers:
      - name: chuka-con
-       image: workspacebychuka/devops:latest #edit image but leave :latest as make variable remain interacting with jenkinsfile {BUILD_NUMBER}
+       image: workspacebychuka/devops:2 #manually change tag number of build, if it doest work try :latest
+       imagePullPolicy: "Always"
        ports:
        - containerPort: 8080
