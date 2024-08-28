@@ -17,6 +17,7 @@ spec:
    spec:
      containers:
      - name: chuka-con
-       image: workspacebychuka/devops:{{build_number}}
+       image: workspacebychuka/devops:2 #if tag number of build doest work try :latest
+       imagePullPolicy: "Always"
        ports:
        - containerPort: 8080
