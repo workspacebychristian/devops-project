@@ -124,7 +124,7 @@ pipeline {
             steps {
                   sshagent(['ssh_key']) {
                         sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl set image deployment/chuka customcontainer=workspacebychuka/devops:${BUILD_NUMBER}\""
-                        //sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl delete pod class-deploy2\""
+                        //sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl delete deployment chuka && kubeclt delete service chuka\""
                         sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl apply -f deployment.yaml\""
                         sh "ssh -i nv-kp.pem -o StrictHostKeyChecking=no ubuntu@107.23.253.7 -C \"kubectl apply -f service.yaml\""
 		    }
