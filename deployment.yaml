@@ -17,6 +17,6 @@ spec:
    spec:
      containers:
      - name: chuka-con
-       image: workspacebychuka/devops:latest #edit image but leave :latest as make variable remain interacting with jenkinsfile {BUILD_NUMBER}
+       image: workspacebychuka/devops:{{build_number}}
        ports:
        - containerPort: 8080
