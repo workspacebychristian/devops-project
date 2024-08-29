@@ -8,7 +8,7 @@
       url: http://54.166.108.10:8082/artifactory/devops-project-libs-release-local/com/theITern/theITern/1.0-RELEASE/theITern-1.0-RELEASE.war
       dest: /home/ubuntu
       url_username: admin
-      url_password: Iamchasingdream$1
+      url_password: xxxxx
 
   - name: Rename .war Artifact
     command: mv -f theITern-1.0-RELEASE.war webapp.war
@@ -45,7 +45,7 @@
   - name: Log into DockerHub
     docker_login:
      username: workspacebychuka@gmail.com
-     password: Iamzebra1
+     password: xxxxx
  
 
   - name: Push to docker hub
