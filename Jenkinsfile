@@ -47,15 +47,15 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "jfrog",
-                    releaseRepo: "devops-project-libs-release-local",
-                    snapshotRepo: "devops-project-libs-release-local"
+                    releaseRepo: "xproject-libs-release-local",
+                    snapshotRepo: "xproject-libs-release-local"
                 )
 
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
                     serverId: "jfrog",
-                    releaseRepo: "devops-project-libs-release",
-                    snapshotRepo: "devops-project-libs-snapshot"
+                    releaseRepo: "xproject-libs-release",
+                    snapshotRepo: "xproject-libs-snapshot"
                 )
             }
     }
