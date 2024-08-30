@@ -9,9 +9,6 @@
       dest: /home/ubuntu
       url_username: admin
       url_password: Iamchasingdream$1
-
-  - name: Rename .war Artifact
-    command: mv -f my-maven-project-1.0-SNAPSHOT.jar webapp.war
   
   - name: make sure python docker library is there for the docker_image module execution
     ansible.builtin.pip:
