@@ -74,15 +74,15 @@
 
     <repositories>
         <repository>
-            <id>devops-project-libs-release</id>
-            <url>http://54.166.108.10:8082/artifactory/devops-project-libs-release</url>
+            <id>xproject-libs-release</id>
+            <url>http://54.166.108.10:8082/artifactory/xproject-libs-release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </repository>
         <repository>
-            <id>devops-project-libs-snapshot</id>
-            <url>http://54.166.108.10:8082/artifactory/devops-project-libs-snapshot</url>
+            <id>xproject-libs-snapshot</id>
+            <url>http://54.166.108.10:8082/artifactory/xproject-libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -91,19 +91,27 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>devops-project-libs-release</id>
-            <url>http://54.166.108.10:8082/artifactory/devops-project-libs-release</url>
+            <id>xproject-libs-release</id>
+            <url>http://54.166.108.10:8082/artifactory/xproject-libs-release</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
         <pluginRepository>
-            <id>devops-project-libs-snapshot</id>
-            <url>http://54.166.108.10:8082/artifactory/devops-project-libs-snapshot</url>
+            <id>xproject-libs-snapshot</id>
+            <url>http://54.166.108.10:8082/artifactory/xproject-libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>sonar-jfrog-releases</name>
+            <url>http://54.166.108.10:8081/artifactory/xproject-libs-release</url>
+        </repository>
+    </distributionManagement>
 </project>
 
