@@ -1,68 +1,55 @@
+#Create Custom Container Image, and Push it to DockerHub Registry
 ---
 - hosts: localhost
-  vars:
-    artifactory_url: "http://54.166.108.10:8082/artifactory/xproject-libs-snapshot-local/com/example/my-maven-project/1.0-SNAPSHOT/"
-    artifactory_user: "admin"
-    artifactory_password: "Iamzebra1!"
-    dest_dir: "/home/ec2-user"
+  tasks: 
+  - name: Pull .jar artifact from Artifactory
+    become: true
+    get_url: 
+      url: http://54.166.108.10:8082/artifactory/xproject-libs-snapshot-local/com/example/my-maven-project/1.0-SNAPSHOT/my-maven-project-1.0-SNAPSHOT.jar
+      dest: /home/ec2-user/
+      url_username: admin
+      url_password: Iamzebra1!
+  
+  - name: make sure python docker library is there for the docker_image module execution
+    ansible.builtin.pip:
+      name: docker
+      
+  - name: install docker engine
+    apt:
+      pkg:
+      - docker
+      - docker.io
+    become: yes
 
-  tasks:
-    - name: List .jar artifacts in Artifactory
-      uri:
-        url: "{{ artifactory_url }}"
-        user: "{{ artifactory_user }}"
-        password: "{{ artifactory_password }}"
-        return_content: yes
-      register: artifactory_response
+  - name: Pull Tomcat  Container Image
+    docker_image:
+      name: !unsafe tomcat:latest
+      source: pull
+      force_tag: yes
 
-    - name: Parse the latest .jar file name from the response
-      set_fact:
-        latest_jar: "{{ artifactory_response.content | regex_findall('my-maven-project-1\\.0-\\d+\\.\\d+-\\d+\\.jar') | sort | last }}"
+  - name: Build image and with build args
+    docker_image:
+      name: workspacebychuka/devops
+      repository: workspacebychuka/devops:{{build_number}}
+      build:
+        path: /home/ec2-user
+        args:
+          listen_port: 8080
+      source: build
+      force_source: yes
+  
+  
+  - name: Log into DockerHub
+    docker_login:
+     username: workspacebychuka@gmail.com
+     password: Iamzebra1
+ 
 
-    - name: Download the latest .jar artifact from Artifactory
-      get_url:
-        url: "{{ artifactory_url }}{{ latest_jar }}"
-        dest: "{{ dest_dir }}"
-        url_username: "{{ artifactory_user }}"
-        url_password: "{{ artifactory_password }}"
-
-    - name: Ensure Python Docker library is installed
-      ansible.builtin.pip:
-        name: docker
-
-    - name: Install Docker Engine
-      apt:
-        name:
-          - docker.io
-        state: present
-      become: yes
-
-    - name: Pull Tomcat Container Image
-      docker_image:
-        name: tomcat:latest
-        source: pull
-        force_tag: yes
-
-    - name: Build Docker image with the latest .jar
-      docker_image:
+  - name: Push to docker hub
+    docker_image:
         name: workspacebychuka/devops
-        repository: workspacebychuka/devops:{{ build_number }}
-        build:
-          path: "{{ dest_dir }}"
-          args:
-            listen_port: 8080
-        source: build
-        force_source: yes
-
-    - name: Log into DockerHub
-      docker_login:
-        username: workspacebychuka@gmail.com
-        password: Iamzebra1
-
-    - name: Push Docker image to DockerHub
-      docker_image:
-        name: workspacebychuka/devops
-        repository: workspacebychuka/devops:{{ build_number }}
+        repository: workspacebychuka/devops:{{build_number}}
         force_tag: yes
         push: yes
         source: local
+    
