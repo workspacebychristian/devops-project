@@ -6,11 +6,9 @@
     become: true
     get_url: 
       url: http://54.166.108.10:8082/artifactory/xproject-libs-snapshot-local/com/example/my-maven-project/1.0-SNAPSHOT/my-maven-project-1.0-20240830.223450-1.jar
-      dest: /home/ec2-user
+      dest: /home/ec2-user/my-maven-project-1.0-20240830.223450-1.jar
       url_username: admin
       url_password: Iamzebra1!
-      force_basic_auth: yes    # Ensures Basic Auth is used
-      #validate_certs: yes      # Enable SSL certificate validation
 
     - name: Rename .war Artifact
     command: mv -f my-maven-project-1.0-20240830.223450-1.jar my-maven-project-1.0-SNAPSHOT.jar
