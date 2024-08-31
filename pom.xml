@@ -40,8 +40,6 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
-        <!-- Other dependencies can be added here -->
     </dependencies>
 
     <!-- Build section -->
@@ -71,4 +69,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- Distribution Management for deployment -->
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>cproject-libs-release</name>
+            <url>http://54.166.108.10:8082/artifactory/cproject-libs-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>cproject-libs-snapshot</name>
+            <url>http://54.166.108.10:8082/artifactory/cproject-libs-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>
