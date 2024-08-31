@@ -9,8 +9,8 @@
       dest: /home/ec2-user
       url_username: admin
       url_password: Iamzebra1!
-      force_basic_auth: yes
-      validate_certs: no
+      force_basic_auth: yes    # Ensures Basic Auth is used
+      validate_certs: yes      # Enable SSL certificate validation
   
   - name: make sure python docker library is there for the docker_image module execution
     ansible.builtin.pip:
