@@ -1,143 +1,74 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Group, Artifact, and Version details -->
     <groupId>com.example</groupId>
-    <artifactId>my-maven-project</artifactId>
+    <artifactId>my-webapp</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.surefire.plugin.version>3.0.0-M8</maven.surefire.plugin.version>
-    </properties>
+    <!-- Packaging type -->
+    <packaging>war</packaging>
 
+    <!-- Project name and description -->
+    <name>My Web Application</name>
+    <description>A simple Java web application</description>
+
+    <!-- Dependencies -->
     <dependencies>
-        <!-- JUnit for testing -->
+        <!-- Servlet API (provided by the container, not included in the WAR) -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.0</version>
-            <scope>test</scope>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
         </dependency>
+
+        <!-- JSP API (if you're using JSP) -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.0</version>
-            <scope>test</scope>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.3</version>
+            <scope>provided</scope>
         </dependency>
+
+        <!-- JSTL (if you're using JSTL tags) -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- Other dependencies can be added here -->
     </dependencies>
 
+    <!-- Build section -->
     <build>
+        <finalName>my-webapp</finalName>
         <plugins>
-            <!-- Maven Compiler Plugin -->
+            <!-- Compiler plugin to specify Java version -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
-            <!-- Surefire Plugin for running tests -->
+            <!-- WAR plugin (optional, Maven automatically handles .war packaging) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
+                <configuration>
+                    <!-- Optional: Specify web.xml location -->
+                    <!--webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml-->
+                </configuration>
             </plugin>
-
-            <!-- Jacoco Plugin for code coverage -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.8</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Maven Antrun Plugin for renaming artifact -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <id>rename-artifact</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>antrun</goal>
-                        </goals>
-                        <configuration>
-                            <target>
-                                <echo message="Renaming artifact..."/>
-                                <move file="${project.build.directory}/my-maven-project-1.0-*.jar"
-                                      tofile="${project.build.directory}/my-maven-project-1.0-SNAPSHOT.jar"/>
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
         </plugins>
     </build>
-
-    <repositories>
-        <repository>
-            <id>xproject-libs-release</id>
-            <url>http://54.166.108.10:8082/artifactory/xproject-libs-release</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>xproject-libs-snapshot</id>
-            <url>http://54.166.108.10:8082/artifactory/xproject-libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>xproject-libs-release</id>
-            <url>http://54.166.108.10:8082/artifactory/xproject-libs-release</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>xproject-libs-snapshot</id>
-            <url>http://54.166.108.10:8082/artifactory/xproject-libs-snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>xproject-libs-snapshot</id>
-            <url>http://54.166.108.10:8082/artifactory/xproject-libs-snapshot</url>
-        </snapshotRepository>
-        <repository>
-            <id>xproject-libs-release</id>
-            <url>http://54.166.108.10:8082/artifactory/xproject-libs-release</url>
-        </repository>
-    </distributionManagement>
 </project>
