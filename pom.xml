@@ -69,6 +69,30 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Maven Antrun Plugin for renaming artifact -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>rename-artifact</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>antrun</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <echo message="Renaming artifact..."/>
+                                <move file="${project.build.directory}/my-maven-project-1.0-*.jar"
+                                      tofile="${project.build.directory}/my-maven-project-1.0-SNAPSHOT.jar"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -117,4 +141,3 @@
         </repository>
     </distributionManagement>
 </project>
-
