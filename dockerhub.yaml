@@ -32,7 +32,7 @@
       name: workspacebychuka/devops
       repository: workspacebychuka/devops:{{build_number}}
       build:
-        path: /home/ubuntu
+        path: /home/ec2-user
         args:
           listen_port: 8080
       source: build
