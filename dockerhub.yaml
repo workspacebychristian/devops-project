@@ -9,6 +9,8 @@
       dest: /home/ubuntu
       url_username: admin
       url_password: Iamzebra1!
+      force_basic_auth: yes
+      validate_certs: no
   
   - name: make sure python docker library is there for the docker_image module execution
     ansible.builtin.pip:
